@@ -5,6 +5,7 @@ import * as moviesCtrl from '../controllers/movies.js'
 /* GET users listing. */
 router.get('/', moviesCtrl.index)
 router.get('/new', moviesCtrl.new)
+router.get('/:id', moviesCtrl.show)
 router.post('/', moviesCtrl.create)
 
 export {

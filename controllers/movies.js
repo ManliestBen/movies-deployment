@@ -4,18 +4,28 @@ export {
   newMovie as new,
   create,
   index,
+  show,
+}
+
+function show(req, res) {
+  Movie.findById(req.params.id, function(err, movie) {
+    res.render("movies/show", { title: "Movie Detail", movie})
+  })
 }
 
 function index(req, res) {
   Movie.find({}, function(error, movies) {
     res.render('movies/index', {
       movies: movies,
+      title: "All movies"
     })
   })
 }
 
 function newMovie(req, res) {
-  res.render('movies/new')
+  res.render('movies/new', {
+    title: "Add Movie"
+  })
 }
 
 function create(req, res) {
