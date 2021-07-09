@@ -1,5 +1,9 @@
 import mongoose from "mongoose"
 
+export {
+  Movie
+}
+
 const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
@@ -27,13 +31,10 @@ const movieSchema = new Schema({
   },
   cast: [String],
   nowShowing: {type: Boolean, default: true},
-  reviews: [reviewSchema]
+  reviews: [reviewSchema],
+  cast: [{type: Schema.Types.ObjectId, ref: 'Performer'}]
 }, {
   timestamps: true,
 })
 
 const Movie = mongoose.model("Movie", movieSchema)
-
-export {
-  Movie
-}

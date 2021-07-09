@@ -1,4 +1,5 @@
 import { Movie } from "../models/movie.js"
+import { Performer } from "../models/performer.js"
 
 export { 
   newMovie as new, 
@@ -6,6 +7,16 @@ export {
   index, 
   show, 
   createReview,
+  addToCast,
+}
+
+function addToCast(req, res) {
+  Movie.findById(req.params.id, function(err, movie) {
+    movie.cast.push(req.body.performerId)
+    movie.save(function(err) {
+      res.redirect(`/movies/${movie._id}`)
+    })
+  })
 }
 
 function createReview(req, res) {
@@ -18,10 +29,15 @@ function createReview(req, res) {
 }
 
 function show(req, res) {
-  Movie.findById(req.params.id, function (err, movie) {
-    res.render("movies/show", { 
-      title: "Movie Detail", 
-      movie: movie,
+  Movie.findById(req.params.id)
+  .populate('cast')
+  .exec(function(err, movie) {
+    Performer.find({_id: {$nin: movie.cast}}, function(err, performers) {
+      res.render('movies/show', {
+        title: 'Movie Detail', 
+        movie, movie,
+        performers: performers,
+      })
     })
   })
 }
@@ -43,16 +59,12 @@ function newMovie(req, res) {
 
 function create(req, res) {
   req.body.nowShowing = !!req.body.nowShowing
-  req.body.cast = req.body.cast.replace(", ", ",")
-  if (req.body.cast) {
-    req.body.cast = req.body.cast.split(",")
-  }
   for (let key in req.body) {
     if (req.body[key] === "") delete req.body[key]
   }
   const movie = new Movie(req.body)
   movie.save(function (err) {
     if (err) return res.render("movies/new")
-    res.redirect("/movies")
+    res.redirect(`/movies/${movie._id}`)
   })
 }
