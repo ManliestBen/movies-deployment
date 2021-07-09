@@ -1,29 +1,48 @@
-* {
-  box-sizing: border-box;
-  font-family: Helvetica;
-  color: #424748;
+html {
+  box-sizing: border-box
+}
+
+/* The Universal Selector */
+*, /* All elements*/
+*::before, /* All ::before pseudo-elements */
+*::after { /* All ::after pseudo-elements */
+  /* height & width will now include border & padding by default
+     but can be over-ridden as needed */
+  box-sizing: inherit;
+}
+
+/* resets font size to be 62.5% of the user preference - 
+     in most browser configurations this will be 10px */
+:root {
+    font-size: 62.5%
 }
 
 body {
+  background-color: gray;
+  /* Use a system font, if none are available use an available sans-sarif font */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   margin: 0;
-  height: 100vh;
+  color: #424748;
+  min-height: 100vh;
   display: grid;
   grid-template-rows: 50px 1fr;
   grid-template-areas:
     "nav"
-    "main"
+    "main";
+  font-size: 1.8rem;
 }
 
 body > nav {
   grid-area: nav;
-  background-color: #B8C0C2;
+  background-color: #b8c0c2;
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px 0 30px;
 }
 
-nav > img {
+nav > i {
   width: 34px;
   object-fit: contain;
   margin-right: auto;
@@ -34,7 +53,7 @@ body > main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #E8ECEB;
+  background-color: #e8eceb;
   padding: 20px;
   overflow-y: scroll;
 }
@@ -48,6 +67,11 @@ nav > a {
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
+  color: #424748;
+}
+
+nav > a:visited {
+  color: #424748;
 }
 
 nav > a:hover {
@@ -62,23 +86,30 @@ nav > a.active {
 #new-form {
   display: grid;
   grid-gap: 10px;
-  grid-template-columns: repeat(2, minmax(auto, 22rem));
+  grid-template-columns: repeat(2, minmax(auto, 35.2rem));
+  font-size: 2rem;
 }
 
-#new-form *,  #add-review-form * {
-  font-size: 20px;
+#new-form *,
+#add-review-form * {
   padding: 5px;
   border-radius: 5px;
 }
 
-#new-form input[type="submit"] {
+#new-form > input,
+#new-form > select {
+  font-size: 2rem;
+}
+
+#new-form > button {
   grid-column: span 2;
-  width: 10rem;
+  width: 16rem;
   margin-left: auto;
+  font-size: 2.2rem;
 }
 
 table {
-  font-size: 20px;
+  font-size: 2rem;
 }
 
 table thead th {
@@ -91,16 +122,22 @@ table td {
   text-align: center;
 }
 
-#list td:nth-child(2), #list td:nth-child(3){
+#list td:nth-child(2),
+#list td:nth-child(3) {
   min-width: 100px;
 }
 
 #list a {
   border-radius: 4px;
-  background-color: #B8C0C2;
+  background-color: #b8c0c2;
   padding: 4px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 1.6rem;
+  color: #424748;
+}
+
+#list a:visited{
+  color: #424748;
 }
 
 #list a:hover {
@@ -110,21 +147,32 @@ table td {
 #show-page {
   display: grid;
   grid-template-columns: auto auto;
-  grid-gap: 1rem;
+  grid-gap: 1.6rem;
 }
 
 #show-page div:nth-child(even) {
   font-weight: bold;
 }
 
- #add-review-form {
-   display: grid;
-   grid-template-columns: auto auto;
-   grid-gap: 1rem;
- }
+#add-review-form {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 1.6rem;
+}
 
- #add-review-form input[type="submit"] {
-   width: 8rem;
-   grid-column: 2 / 3;
-   margin-bottom: 2rem;
- }
+#add-review-form > textarea {
+  width: 25rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* #add-review-form > label {
+  font-size: 20px;
+} */
+
+#add-review-form > button {
+  font-size: 1.6rem;
+  width: 12.8rem;
+  grid-column: 2 / 3;
+  margin-bottom: 2.4rem;
+}
