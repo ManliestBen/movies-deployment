@@ -13,6 +13,7 @@
     <div><%= movie.mpaaRating %></div>
     <div>Now Showing: </div>
     <div><%= movie.nowShowing ? 'Yes' : 'Nope' %></div>
+    <% // start cast list %>
     <div>Cast:</div>
     <ul>
       <% movie.cast.forEach(perf => { %>
@@ -24,6 +25,7 @@
         </li>
       <% }) %> 
     </ul>
+    <% // end cast list %>
   </section>
   <% // add to cast form below this comment %>
   <form 
