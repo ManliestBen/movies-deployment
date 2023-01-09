@@ -46,7 +46,7 @@ function index(req, res) {
   Movie.find({}, function (error, movies) {
     res.render("movies/index", {
       movies: movies,
-      title: "All movies",
+      title: "All Movies",
     })
   })
 }
